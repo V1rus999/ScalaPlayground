@@ -1,8 +1,5 @@
 package main.scala
 
-import main.scala.`trait`.Child
-import main.scala.tuples.StockInfo
-
 /**
   * Created by johannesC on 2019/03/12.
   */
