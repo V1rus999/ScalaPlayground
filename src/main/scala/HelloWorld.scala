@@ -19,11 +19,19 @@ object HelloWorld extends App {
   println(s"$symbol current price is $currentPrice with a bid price of $bidPrice")
 
   val someClass = new FluentApiClass()
-  someClass.setClassName("HelloWorld")
+  someClass.
+    setClassName("HelloWorld")
     .setClassPath("/main/scala/")
     .setClassExtension(".scala")
   someClass.print
 
   val classWithoutNew = ClassWithoutNew(ClassWithoutNew.getClass.toString)
   println(classWithoutNew.name)
+
+  val generics = new Generics()
+  val stringMonoid = generics.getMonoidForMyThing("MyStringThatShouldBeWrapped")
+  println(stringMonoid.retrieve)
+  val nullThing = generics.getMonoidForMyThing(null)
+  println(nullThing.retrieve)
+
 }
