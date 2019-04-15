@@ -5,8 +5,6 @@ def boolToInt(value: Boolean) = if (value) 1 else 0
 println(boolToInt(true))
 println(boolToInt(false))
 
-42
-
 val pNr = (n: Int) => println(s"Number $n")
 
 val numbers = List(1, 2, 3, 4)
@@ -23,7 +21,7 @@ def someFunction = "Some method"
 
 println(someFunction)
 
-def printType(obj: AnyRef) = obj match {
+def printType(obj: AnyRef): Unit = obj match {
   case _: String => println("This is a string")
   case _: List[_] => println("This is an array")
   case _ => throw new IllegalArgumentException("This is an unsupported type")
@@ -55,7 +53,7 @@ stringToSearch.find(_ == 'H')
 stringToSearch.find(_ == 'A')
 stringToSearch find (_ == 'A')
 
-//This is like an extention function in Kotlin
+//This is like an extension function in Kotlin
 implicit class BinaryUtil(s: String) {
   def toBinary = Integer.parseInt(s, 2)
 }
@@ -63,8 +61,7 @@ implicit class BinaryUtil(s: String) {
 val binary = "1001"
 binary.toBinary
 
-val someRange = 1 to 5
-
+// Traits and options
 trait Animal {
   val greeting: Option[String]
   val age: Option[Int] = None
@@ -79,18 +76,20 @@ class Dog extends Animal {
 val dog = new Dog()
 dog.toString
 
-val double = (i: Int) => {
-  i * 2
-}
 
+// Function literals
 val isEven: Int => Boolean = _ % 2 == 0
-
-println(double(3))
-println(isEven(double(3)))
 
 val list = List.range(1, 10)
 val even = list.filter(isEven)
 println(even)
+
+// Partial functions
+val double = (i: Int) => {
+  i * 2
+}
+println(double(3))
+println(isEven(double(3)))
 
 val partialDouble = double(_)
 println(partialDouble(2))
@@ -101,5 +100,6 @@ val sum = (a: Int, b: Int, c: Int) => {
 
 val sumWithoutC = sum(2, 4, _: Int)
 println(sumWithoutC(6))
+
 
 

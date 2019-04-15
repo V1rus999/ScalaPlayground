@@ -34,4 +34,8 @@ object HelloWorld extends App {
   val nullThing = generics.getMonoidForMyThing(null)
   println(nullThing.retrieve)
 
+  println(Multiplication.persistence(999))
 }
+
+
+
