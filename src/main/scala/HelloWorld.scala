@@ -35,6 +35,22 @@ object HelloWorld extends App {
   println(nullThing.retrieve)
 
   println(Multiplication.persistence(999))
+
+  val stringPrinter = FunctionStuff.createPrinter[String]()
+  stringPrinter("Hi")
+
+  val objectPrinter = FunctionStuff.createPrinter[Generics]()
+  objectPrinter(generics)
+
+  FunctionStuff.invokerOfMethods(FunctionStuff.invokableMethod)
+
+  val (sum, mult) = FunctionStuff.execTwoFunctions({ (x, y) => x + y }, { (x, y) => x * y }, 15, 20)
+  println(s"execTwoFunctions Sum $sum Mult $mult")
+
+  val intList = List.range(1, 10)
+  val boolList = Mapper.intMap({_ % 2 == 0}, intList)
+  println("Bool list from int list")
+  println(boolList)
 }
 
 

@@ -78,10 +78,15 @@ dog.toString
 
 
 // Function literals
-val isEven: Int => Boolean = _ % 2 == 0
+val longerIsEven = (n: Int) => n % 2 == 0
+
+val implicitIsEven: Int => Boolean = _ % 2 == 0
+
+val isTheSame: (Int, Int) => Boolean = _ == _
+println(isTheSame(3, 1))
 
 val list = List.range(1, 10)
-val even = list.filter(isEven)
+val even = list.filter(implicitIsEven)
 println(even)
 
 // Partial functions
@@ -89,7 +94,7 @@ val double = (i: Int) => {
   i * 2
 }
 println(double(3))
-println(isEven(double(3)))
+println(implicitIsEven(double(3)))
 
 val partialDouble = double(_)
 println(partialDouble(2))
