@@ -2,6 +2,7 @@ package main.scala
 
 import main.scala.`trait`.Child
 import main.scala.tuples.StockInfo
+import Mapper._
 
 /**
   * Created by johannesC on 2019/03/12.
@@ -47,10 +48,20 @@ object HelloWorld extends App {
   val (sum, mult) = FunctionStuff.execTwoFunctions({ (x, y) => x + y }, { (x, y) => x * y }, 15, 20)
   println(s"execTwoFunctions Sum $sum Mult $mult")
 
-  val intList = List.range(1, 10)
+  implicit val intList: List[Int] = List.range(1, 5)
   val boolList = Mapper.intMap({_ % 2 == 0}, intList)
   println("Bool list from int list")
   println(boolList)
+
+  //Compiler is smart enough to use int list above
+  val boolListFromGenMap = Mapper.genMap[Int, Boolean]({_ % 2 == 0})
+  println("Bool list from gen map list")
+  println(boolListFromGenMap)
+
+  //Compiler is smart enough to use the gen map implicit class/method from the mapper class
+  val boolListFromImplClass = intList.genMap({_ % 2 == 0})
+  println("Bool list from gen map class")
+  println(boolListFromImplClass)
 }
 
 
