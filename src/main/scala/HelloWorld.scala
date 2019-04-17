@@ -80,6 +80,28 @@ object HelloWorld extends App {
     10
   }), 10 seconds)
   println(s"Got long running func cb $resultOfFunc")
+
+  def test1(test: () => Boolean): Unit = {
+    if (test()) {
+      // Do something
+    }
+  }
+
+  // This is called "by-name" parameters
+  def test2(test: => Boolean): Unit = {
+    if (test) {
+      //do something
+    }
+  }
+
+  test1({ () =>
+    1 == 1
+  })
+
+  // With by name you don't have to do ^^^
+  test2(1 == 1)
+
+  Recursion.printSum()
 }
 
 
