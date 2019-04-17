@@ -4,6 +4,9 @@ import main.scala.`trait`.Child
 import main.scala.tuples.StockInfo
 import Mapper._
 
+import scala.concurrent.Await
+import scala.concurrent.duration._
+
 /**
   * Created by johannesC on 2019/03/12.
   */
@@ -11,10 +14,7 @@ object HelloWorld extends App {
   println("Hello world")
 
   val child = new Child()
-  println(s"c.printSuper  = ${child.printSuper}")
-  println(s"child.printMother = ${child.printMother}")
-  println(s"child.printFather = ${child.printFather}")
-  println(s"child.printHuman  = ${child.printHuman}")
+  child.printAll()
 
   val (symbol, currentPrice, bidPrice) = new StockInfo().getStockInfoFor("AMZ")
   println(s"$symbol current price is $currentPrice with a bid price of $bidPrice")
@@ -49,19 +49,37 @@ object HelloWorld extends App {
   println(s"execTwoFunctions Sum $sum Mult $mult")
 
   implicit val intList: List[Int] = List.range(1, 5)
-  val boolList = Mapper.intMap({_ % 2 == 0}, intList)
+  val boolList = Mapper.intMap({
+    _ % 2 == 0
+  }, intList)
   println("Bool list from int list")
   println(boolList)
 
   //Compiler is smart enough to use int list above
-  val boolListFromGenMap = Mapper.genMap[Int, Boolean]({_ % 2 == 0})
+  val boolListFromGenMap = Mapper.genMap[Int, Boolean]({
+    _ % 2 == 0
+  })
   println("Bool list from gen map list")
   println(boolListFromGenMap)
 
   //Compiler is smart enough to use the gen map implicit class/method from the mapper class
-  val boolListFromImplClass = intList.genMap({_ % 2 == 0})
+  val boolListFromImplClass = intList.genMap({
+    _ % 2 == 0
+  })
   println("Bool list from gen map class")
   println(boolListFromImplClass)
+
+  println("Starting network request")
+  val networker = new IntoTheFuture
+  val result = Await.result(networker.doMyLongRunningRequest("Hi there"), 10 seconds)
+  println(s"Got network cb $result")
+
+  println("Starting long running func")
+  val resultOfFunc = Await.result(networker.doMyLongRunningFunc({
+    println("Hi Func")
+    10
+  }), 10 seconds)
+  println(s"Got long running func cb $resultOfFunc")
 }
 
 

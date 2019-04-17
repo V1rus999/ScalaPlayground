@@ -103,6 +103,10 @@ val sum = (a: Int, b: Int, c: Int) => {
   a + b + c
 }
 
+val curriedSum = sum.curried //This converts the single parameter group into multiple parameter groups
+// With normal sum you call sum(1,2,3), with the curried version you can call
+val partialCurry = curriedSum(1)(_ : Int)(3)
+
 val sumWithoutC = sum(2, 4, _: Int)
 println(sumWithoutC(6))
 
