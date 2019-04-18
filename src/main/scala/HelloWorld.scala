@@ -70,12 +70,12 @@ object HelloWorld extends App {
   println(boolListFromImplClass)
 
   println("Starting network request")
-  val networker = new IntoTheFuture
-  val result = Await.result(networker.doMyLongRunningRequest("Hi there"), 10 seconds)
+  val taskRunner = new IntoTheFuture
+  val result = Await.result(taskRunner.doMyLongRunningRequest("Hi there"), 10 seconds)
   println(s"Got network cb $result")
 
   println("Starting long running func")
-  val sumResult = Await.result(networker.doMyLongRunningFunc(Recursion.sumWithTailRec(List.range(1,20000), 0)), 60 seconds)
+  val sumResult = Await.result(taskRunner.doMyLongRunningFunc(Recursion.sumWithTailRec(List.range(1,20000), 0)), 60 seconds)
   println(s"Got long running func cb $sumResult")
 
   def test1(test: () => Boolean): Unit = {

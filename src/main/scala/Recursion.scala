@@ -27,4 +27,14 @@ object Recursion {
     case Nil => accumulator
     case first :: theRest => sumWithTailRec(theRest, accumulator + first)
   }
+
+  def calculator(nrs: List[(String, Int)], accumulator: Int): Int = nrs match {
+    case Nil => accumulator
+    case first :: theRest => calculator(theRest, calculate(first._1, first._2, accumulator))
+  }
+
+  private def calculate(operation: String, number: Int, accumulator: Int) = operation match {
+    case "+" => accumulator + number
+    case "-" => accumulator - number
+  }
 }
