@@ -75,11 +75,8 @@ object HelloWorld extends App {
   println(s"Got network cb $result")
 
   println("Starting long running func")
-  val resultOfFunc = Await.result(networker.doMyLongRunningFunc({
-    println("Hi Func")
-    10
-  }), 10 seconds)
-  println(s"Got long running func cb $resultOfFunc")
+  val sumResult = Await.result(networker.doMyLongRunningFunc(Recursion.sumWithTailRec(List.range(1,20000), 0)), 60 seconds)
+  println(s"Got long running func cb $sumResult")
 
   def test1(test: () => Boolean): Unit = {
     if (test()) {
@@ -101,7 +98,6 @@ object HelloWorld extends App {
   // With by name you don't have to do ^^^
   test2(1 == 1)
 
-  Recursion.printSum()
 }
 
 

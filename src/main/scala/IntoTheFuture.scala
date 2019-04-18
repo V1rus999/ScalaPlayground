@@ -7,7 +7,7 @@ class IntoTheFuture {
 
   def doMyLongRunningRequest(request: String): Future[String] = {
     Future {
-      Thread.sleep(3000)
+      Thread.sleep(200)
       request
     }
   }
