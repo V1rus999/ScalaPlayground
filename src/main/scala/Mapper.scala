@@ -21,4 +21,14 @@ object Mapper {
       } yield mapFunc(item)
     }
   }
+
+  def showMapVsFlatMap(): Unit = {
+    val list = List("foo", "bar")
+
+    println("showMapVsFlatMap")
+    val mapResult = list.map(_.split(""))
+    println(mapResult) // This results in a list with two lists foo and bar
+    val flatMapResult = list.flatMap(_.split(""))
+    println(flatMapResult) // This results in one list with foobar
+  }
 }
