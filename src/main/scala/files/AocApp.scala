@@ -4,7 +4,12 @@ import main.scala.Recursion
 
 object AocApp extends App {
   println("AOC APP Run")
-  val result = Recursion.calculator(FileReader.read(), 0)
-  println(result)
+  FileReader.read() match {
+    case Some(_) =>
+      val result = Recursion.calculator(_, 0)
+      println(result)
+    case None =>
+      println("Issue reading file input")
+  }
 
 }

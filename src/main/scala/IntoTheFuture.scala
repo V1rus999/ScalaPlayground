@@ -13,7 +13,7 @@ class IntoTheFuture {
   }
 
   // This is a generic function and will return whatever the input function returns.
-  def doMyLongRunningFunc[A](function: => A) = {
+  def doMyLongRunningFunc[A](function: => A): Future[(A, Double)] = {
     Future {
       val startTime = System.nanoTime
       val result = function

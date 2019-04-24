@@ -62,6 +62,8 @@ object HelloWorld extends App {
   println("Bool list from gen map list")
   println(boolListFromGenMap)
 
+  Mapper.showMapVsFlatMap()
+
   //Compiler is smart enough to use the gen map implicit class/method from the mapper class
   val boolListFromImplClass = intList.genMap({
     _ % 2 == 0
@@ -75,8 +77,9 @@ object HelloWorld extends App {
   println(s"Got network cb $result")
 
   println("Starting long running func")
-  val sumResult = Await.result(taskRunner.doMyLongRunningFunc(Recursion.sumWithTailRec(List.range(1,20000), 0)), 60 seconds)
+  val sumResult = Await.result(taskRunner.doMyLongRunningFunc(Recursion.sumWithTailRec(List.range(1, 20000), 0)), 60 seconds)
   println(s"Got long running func cb $sumResult")
+
 
   def test1(test: () => Boolean): Unit = {
     if (test()) {
@@ -84,7 +87,7 @@ object HelloWorld extends App {
     }
   }
 
-  // This is called "by-name" parameters
+  // This is called "by name" parameters
   def test2(test: => Boolean): Unit = {
     if (test) {
       //do something
@@ -95,7 +98,7 @@ object HelloWorld extends App {
     1 == 1
   })
 
-  // With by name you don't have to do ^^^
+  // With by name you don't have to do ^^^ (Pass in an "anon function")
   test2(1 == 1)
 
 }
