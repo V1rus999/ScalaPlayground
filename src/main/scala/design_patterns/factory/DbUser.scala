@@ -16,6 +16,8 @@ object DbUser {
     val pgSqlFactory = new AbstractFactoryDatabaseClient(new PgSqlFactory)
     sqlFactory.executeQuery("Sql")
     pgSqlFactory.executeQuery("pgSql")
+
+
   }
 
 }

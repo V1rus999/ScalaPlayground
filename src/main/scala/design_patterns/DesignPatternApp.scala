@@ -1,5 +1,6 @@
 package main.scala.design_patterns
 
+import main.scala.design_patterns.bridge.{SaltedPasswordConverter, Sha256Hasher}
 import main.scala.design_patterns.factory.DbUser
 
 object DesignPatternApp extends App {
@@ -7,4 +8,7 @@ object DesignPatternApp extends App {
 
   DbUser.executeDbCalls()
 
+  val password = new SaltedPasswordConverter("superCoolSalt!@()", new Sha256Hasher)
+  val convertedPassword = password.convert("password123")
+  println(convertedPassword)
 }
