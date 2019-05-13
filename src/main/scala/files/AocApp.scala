@@ -11,5 +11,4 @@ object AocApp extends App {
     case None =>
       println("Issue reading file input")
   }
-
 }
