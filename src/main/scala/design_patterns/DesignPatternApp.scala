@@ -8,7 +8,7 @@ object DesignPatternApp extends App {
 
   DbUser.executeDbCalls()
 
-  val password = new SaltedPasswordConverter("superCoolSalt!@()", new Sha256Hasher)
+  val password = new SaltedPasswordConverter("superCoolSalt!@()") with Sha256Hasher
   val convertedPassword = password.convert("password123")
   println(convertedPassword)
 }
