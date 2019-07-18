@@ -1,3 +1,4 @@
+
 val hello = "Hello World"
 
 object Scoring {
